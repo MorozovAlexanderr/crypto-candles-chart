@@ -1,7 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { CandlesResponse } from "../types";
 import dayjs from "dayjs";
+
+type CandlesResponse = {
+  code: number;
+  data: number[][];
+  message: string;
+};
 
 const fetchCandles = async (
   symbol: string,

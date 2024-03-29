@@ -1,10 +1,8 @@
 import Chart, { ReactGoogleChartProps } from "react-google-charts";
-import { QueryClientProvider } from "@tanstack/react-query";
 import { useCandles } from "../../api/candles";
-import { queryClient } from "../../lib";
 
-type CandlestickChartProps = Partial<ReactGoogleChartProps> & {
-  pair: string;
+export type CandlestickChartProps = Partial<ReactGoogleChartProps> & {
+  pair?: string;
 };
 
 const chartOptions = {
@@ -15,9 +13,14 @@ const chartOptions = {
   },
 };
 
-const CandlestickChart = ({ pair, ...props }: CandlestickChartProps) => {
+const chartHeader = ["Time", "Low", "Open", "Close", "High"];
+
+const CandlestickChart = ({
+  pair = "BTCUSDT",
+  ...props
+}: CandlestickChartProps) => {
   const { data, isFetching, error } = useCandles(pair);
-  const chartData = [["Time", "", "", "", ""], ...(data ?? [])];
+  const chartData = [chartHeader, ...(data || [])];
 
   if (isFetching) {
     return <div>Loading...</div>;
@@ -38,12 +41,5 @@ const CandlestickChart = ({ pair, ...props }: CandlestickChartProps) => {
     />
   );
 };
-
-// Needs for external usage by npm package
-export const CandlestickChartWithProvider = (props: CandlestickChartProps) => (
-  <QueryClientProvider client={queryClient}>
-    <CandlestickChart {...props} />
-  </QueryClientProvider>
-);
 
 export default CandlestickChart;

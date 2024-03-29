@@ -1,14 +1,21 @@
-import { QueryClientProvider } from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import CandlesChart from "./components/CandlestickChart";
-import { queryClient } from "./lib";
+import { CandlestickChartProps } from "./components/CandlestickChart/CandlestickChart";
 
-function App() {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <h1>BTC/USDT Candlestick chart</h1>
-      <CandlesChart pair="BTCUSDT" />
-    </QueryClientProvider>
-  );
-}
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      retry: false,
+    },
+  },
+});
+
+const App = (props: CandlestickChartProps) => (
+  <QueryClientProvider client={queryClient}>
+    <h1>{props.pair || "BTCUSDT"} Candlestick chart</h1>
+    <CandlesChart {...props} />
+  </QueryClientProvider>
+);
 
 export default App;
