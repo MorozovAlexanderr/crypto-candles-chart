@@ -1,5 +1,9 @@
-import Chart from "react-google-charts";
+import Chart, { ReactGoogleChartProps } from "react-google-charts";
 import { useCandles } from "../../api/candles";
+
+type CandlestickChartProps = Partial<ReactGoogleChartProps> & {
+  pair: string;
+};
 
 const chartOptions = {
   legend: "none",
@@ -9,8 +13,8 @@ const chartOptions = {
   },
 };
 
-const CandlestickChart = () => {
-  const { data, isFetching, error } = useCandles("BTCUSDT");
+const CandlestickChart = ({ pair, ...props }: CandlestickChartProps) => {
+  const { data, isFetching, error } = useCandles(pair);
   const chartData = [["Time", "", "", "", ""], ...(data ?? [])];
 
   if (isFetching) {
@@ -28,6 +32,7 @@ const CandlestickChart = () => {
       height="500px"
       data={chartData}
       options={chartOptions}
+      {...props}
     />
   );
 };

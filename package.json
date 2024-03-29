@@ -1,8 +1,25 @@
 {
-  "name": "crypto-price-chart",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
+  "name": "crypto-candles-chart",
+  "private": false,
+  "description": "A library that exposes a candlestick chart for cryptocurrencies",
+  "version": "1.0.4",
+  "main": "dist/index.umd.js",
+  "module": "dist/index.es.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.umd.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./styles": "./dist/style.css"
+  },
+  "files": [
+    "/dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -11,11 +28,13 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^5.28.9",
+    "@types/node": "^20.11.30",
     "axios": "^1.6.8",
     "dayjs": "^1.11.10",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-google-charts": "^4.0.1"
+    "react-google-charts": "^4.0.1",
+    "vite-plugin-dts": "^3.8.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",

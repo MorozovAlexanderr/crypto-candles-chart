@@ -14,7 +14,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <h1>BTC/USDT Candlestick chart</h1>
-      <CandlesChart />
+      <CandlesChart pair="BTCUSDT" />
     </QueryClientProvider>
   );
 }
