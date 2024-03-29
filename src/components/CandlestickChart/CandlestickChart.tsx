@@ -1,5 +1,7 @@
 import Chart, { ReactGoogleChartProps } from "react-google-charts";
+import { QueryClientProvider } from "@tanstack/react-query";
 import { useCandles } from "../../api/candles";
+import { queryClient } from "../../lib";
 
 type CandlestickChartProps = Partial<ReactGoogleChartProps> & {
   pair: string;
@@ -8,8 +10,8 @@ type CandlestickChartProps = Partial<ReactGoogleChartProps> & {
 const chartOptions = {
   legend: "none",
   candlestick: {
-    fallingColor: { strokeWidth: 0, fill: "#a52714" }, // red
-    risingColor: { strokeWidth: 0, fill: "#0f9d58" }, // green
+    fallingColor: { strokeWidth: 0, fill: "#a52714" },
+    risingColor: { strokeWidth: 0, fill: "#0f9d58" },
   },
 };
 
@@ -36,5 +38,12 @@ const CandlestickChart = ({ pair, ...props }: CandlestickChartProps) => {
     />
   );
 };
+
+// Needs for external usage by npm package
+export const CandlestickChartWithProvider = (props: CandlestickChartProps) => (
+  <QueryClientProvider client={queryClient}>
+    <CandlestickChart {...props} />
+  </QueryClientProvider>
+);
 
 export default CandlestickChart;

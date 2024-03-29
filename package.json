@@ -2,7 +2,7 @@
   "name": "crypto-candles-chart",
   "private": false,
   "description": "A library that exposes a candlestick chart for cryptocurrencies",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "main": "dist/index.umd.js",
   "module": "dist/index.es.js",
   "types": "dist/index.d.ts",
