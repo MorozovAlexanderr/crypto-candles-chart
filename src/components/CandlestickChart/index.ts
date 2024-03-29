@@ -1,1 +1,4 @@
-export { default, CandlestickChartWithProvider } from "./CandlestickChart";
+export {
+  default,
+  CandlestickChartWithProvider as CandlestickChart,
+} from "./CandlestickChart";
